@@ -1,4 +1,8 @@
 /* ===========GLOBAL-STYLES======== */
+:root {
+--standard-seat: #03a9f4;
+--vip-seat: #8bc34a;
+}
 * {box-sizing: border-box;}
 html {
   height: 100%;
@@ -13,19 +17,23 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 0;
+  padding: 100px;
   margin: 0;
   font-family: "Inter", "Arial", serif;
   font-style: normal;
   font-weight: normal;
+  background-color: aqua;
 }
 .container {
   width: 100%;
-  max-width: 1040px;
-  padding-left: 20px;
-  padding-right: 20px;
+  max-width: 740px;
+  padding: 20px;
   margin-left: auto;
   margin-right: auto;
+  background-color: #333;
+  border-radius: 5px;
+  box-shadow: 0 10px 2px rgba(0, 0, 0, 0.5);
+  color: #fff;
 }
 .button {
   display: inline-block;
@@ -43,7 +51,247 @@ img {
   max-width: 100%;
   height: auto;
 }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
 * :focus {
-  outline: 2px dashed #7296ec;
+  outline: 2px dashed #245ce0;
   outline-offset: 3px;
 }
+
+/* =========HEADER====== */
+.ticket__form {
+  width: 100%;
+  max-width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.ticket-form__header {
+  position: relative;
+  z-index: 1;
+
+}
+
+.form-header-title__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-right: 60px;
+}
+.ticket-form-header__title {
+  margin: 0;
+  margin-right: 20px;
+}
+.movie-info__badge {
+  display: inline-block;
+  padding: 5px;
+  background-color: #888;
+  border-radius: 5px;
+}
+.movie-info__badge:not(:last-child) {
+  margin-right: 8px;
+}
+.cinema-name {
+  margin-top: 0;
+  color: #aaa;
+}
+.close__button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background-color: transparent;
+  background-image: url(img/close_white_24dp.svg);
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: center center;
+  opacity: 0.5;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+.close__button:hover,
+.close__button:focus {
+opacity: 1;
+}
+.divider {
+  margin-bottom: 20px;
+  height: 1px;
+  border: none;
+  background-color: #888;
+}
+
+
+/* ===========cinema======== */
+.cinema__screen {
+  padding-left: 45px;
+  padding-right: 45px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.cinema__poster {
+  transform-origin: center top;
+  height: 240px;
+  transform-style: preserve-3d;
+  transform: perspective(2000px) rotateX(-55deg);
+  transform-origin: center top;
+  border-radius: 5px;
+  box-shadow: 0 50px 40px -30px rgba(240, 235, 235, 0.5) ;
+}
+
+.cinema__seats {
+transform-origin: 50% 0;
+transform:perspective(2000px) rotateX(45deg);
+transform-style: preserve-3d;
+}
+
+
+/* =========CHECKBOXES===== */
+.cinema-seats__list::before
+.cinema-seats__list::after
+{
+  font-size: 13px;
+  color: #fff;
+}
+  .cinema-seats__list:first-child::before,
+  .cinema-seats__list:first-child::after
+{
+  content: "1";
+}
+  .cinema-seats__list:nth-child(2)::before,
+  .cinema-seats__list:nth-child(2)::after
+{
+  content: "2"
+}
+  .cinema-seats__list:nth-child(3)::before,
+  .cinema-seats__list:nth-child(3)::after
+  {
+    content: "3"
+  }
+  .cinema-seats__list:nth-child(4)::before,
+  .cinema-seats__list:nth-child(4)::after
+{
+  content: "4"}
+
+.cinema-seats__list {
+  display: flex;
+  align-items: center;
+  justify-content:space-between ;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cinema-seats__list:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.seat__item {
+  position: relative;
+}
+.seat__control::before {
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  content: "";
+  border: 2px dotted var(--standard-seat);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  transition: border 0.3s ease
+  transform 0.3s ease,
+  opacity 0.3s ease ;
+}
+.vip__seat .seat__control::before {
+  border: 2px dotted var(--vip-seat);
+}
+.seat__control {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 25px;
+  height: 25px;
+  background-color: var(--standard-seat);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  transform:translateZ(10px);
+}
+.vip__seat .seat__control {
+  background-color: var(--vip-seat);
+}
+.seat__number {
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+/* ========FOCUS VERSION====== */
+ .seat__checkbox:focus + .seat__control::before
+{
+  transform: scale(1);
+  opacity: 1;
+}
+ .seat__checkbox:focus + .seat__control .seat__number {
+opacity: 1;
+}
+
+/* =========HOVER VERSION======= */
+.seat:hover .seat__control::before{
+  transform: scale(1);
+  opacity: 1;
+  border: 2px solid var(--standard-seat);
+}
+.vip__seat .seat:hover .seat__control::before {
+  border: 2px solid var(--vip-seat);
+}
+.seat:hover .seat__number {
+opacity: 1;
+}
+
+/* ==========ACTIVE VERSION===== */
+.seat:active {
+  opacity: 0.5;
+}
+
+/* ========CHECKED VERSION========= */
+.seat__checkbox:checked + .seat__control::before {
+  border: 2.5px solid var(--standard-seat);
+  transform: scale(1);
+  opacity: 1;
+}
+.vip__seat .seat__checkbox:checked + .seat__control::before {
+  border: 2.5px solid var(--vip-seat);
+}
+ .seat__checkbox:checked + .seat__control .seat__number {
+   opacity: 1;
+ }
+
+ /* =======DISABLED VERSION======== */
+ .seat__checkbox:disabled + .seat__control {
+   background-color: #ccc;
+ }
+ .seat__checkbox:disabled + .seat__control .seat__number {
+  opacity: 1;
+  color: #999;
+}
+ .seat__checkbox:disabled + .seat__control::before {
+  transform: scale(0);
+  opacity: 0;
+}
+
+/* =====VIP-SEATS===== */
