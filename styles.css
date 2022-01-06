@@ -2,6 +2,7 @@
 :root {
 --standard-seat: #03a9f4;
 --vip-seat: #8bc34a;
+--booked-seat: #ccc;
 }
 * {box-sizing: border-box;}
 html {
@@ -213,9 +214,9 @@ transform-style: preserve-3d;
   border-radius: 50%;
   transform: scale(0);
   opacity: 0;
-  transition: border 0.3s ease
+  transition: border 0.3s ease,
   transform 0.3s ease,
-  opacity 0.3s ease ;
+  opacity 0.3s ease;
 }
 .vip__seat .seat__control::before {
   border: 2px dotted var(--vip-seat);
@@ -224,12 +225,13 @@ transform-style: preserve-3d;
   position: relative;
   z-index: 1;
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 25px;
   height: 25px;
   background-color: var(--standard-seat);
   border-radius: 50%;
-  justify-content: center;
-  align-items: center;
+  cursor: pointer;
   transform:translateZ(10px);
 }
 .vip__seat .seat__control {
@@ -237,7 +239,7 @@ transform-style: preserve-3d;
 }
 .seat__number {
   opacity: 0;
-  transition: 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 /* ========FOCUS VERSION====== */
@@ -264,9 +266,11 @@ opacity: 1;
 }
 
 /* ==========ACTIVE VERSION===== */
-.seat:active {
+/* .seat:active {
   opacity: 0.5;
-}
+} */
+.seat:active .seat__checkbox:not(:disabled) + .seat__control {
+  opacity: 0.5;}
 
 /* ========CHECKED VERSION========= */
 .seat__checkbox:checked + .seat__control::before {
@@ -283,15 +287,67 @@ opacity: 1;
 
  /* =======DISABLED VERSION======== */
  .seat__checkbox:disabled + .seat__control {
-   background-color: #ccc;
+   background-color: var(--booked-seat);
+   cursor: not-allowed;
+   pointer-events: none;
  }
  .seat__checkbox:disabled + .seat__control .seat__number {
   opacity: 1;
-  color: #999;
+  color: var(--booked-seat);
 }
  .seat__checkbox:disabled + .seat__control::before {
   transform: scale(0);
   opacity: 0;
 }
 
-/* =====VIP-SEATS===== */
+/* =====FOOTER//SEAT-PRICEs===== */
+.form__footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.seat__prices {
+display: flex;
+padding: 0;
+margin: 0;
+list-style-type: none;
+font-size: 14px;
+color: #ddd;
+}
+.seat-price__item {
+  display: flex;
+  margin-right: 30px;
+  align-items: center;
+
+}
+.seat-price__item::before {
+width: 15px;
+height: 15px;
+margin-right: 10px;
+border-radius: 50%;
+background-color: var(--standard-seat);
+content: "";
+}
+.seat-price__vip::before {
+  background-color: var(--vip-seat);
+}
+.seat-price__booked::before {
+  background-color: var(--booked-seat);
+}
+.ticket-form__submit {
+border: none;
+padding: 10px 20px;
+border-radius: 5px;
+background-color: var(--standard-seat);
+text-transform: uppercase;
+font-weight: bold;
+color: #fff;
+letter-spacing: 2px;
+cursor: pointer;
+}
+.ticket-form__submit:hover {
+opacity: 0.7;
+}
+.ticket-form__submit:active {
+opacity: 0.5;
+}

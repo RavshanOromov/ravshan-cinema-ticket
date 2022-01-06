@@ -133,7 +133,7 @@
    <ol class="cinema-seats__list">
      <li class="seat__item">
        <label class="seat">
-         <input class="seat__checkbox visually-hidden" type="checkbox" name="row-2-seat-1" >
+         <input class="seat__checkbox visually-hidden" type="checkbox" name="row-2-seat-1" disabled >
          <span class="seat__control" aria-label="row-2-seat-1">
            <span class="seat__number">1</span>
           </span>
@@ -381,6 +381,15 @@
 
         </div>
       </section>
+      <hr class="divider">
+      <footer class="form__footer">
+<ul class="seat__prices">
+  <li class="seat-price__item">Standard 10$</li>
+  <li class="seat-price__item seat-price__vip">VIP 15$</li>
+  <li class="seat-price__item seat-price__booked" aria-hidden="true">Booked</li>
+</ul>
+<button class="ticket-form__submit" type="submit">Done</button>
+      </footer>
     </form>
   </div>
 
